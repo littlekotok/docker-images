@@ -66,7 +66,6 @@ RUN set -eux; \
         ./configure \
             --build="$gnuArch" \
             --prefix="/etc/php${PHP_VERSION}/" \
-            # --exec-prefix="/usr" \
             --with-config-file-scan-dir="$PHP_INI_SCAN_DIR" \
             --enable-mysqlnd \
             --with-pdo-mysql \
