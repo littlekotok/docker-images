@@ -30,6 +30,7 @@ RUN set -eux; \
             nano \
             openssl \
             wget \
+            procps \
             $PHPIZE_DEPS \
             ca-certificates \
             curl \
@@ -100,10 +101,11 @@ RUN set -eux; \
 # Set php config & binary files
 RUN set -eux; \
         cp "/opt/php-${PHP_VERSION}/php.ini-development" "/etc/php${PHP_VERSION}/lib/php.ini"; \
-        cp "/opt/php-${PHP_VERSION}/php.ini-production" "/etc/php${PHP_VERSION}/lib/php.ini-production"; \
+        cp "/opt/php-${PHP_VERSION}/php.ini-development" "/etc/php${PHP_VERSION}/etc/php.ini"; \
         ln -s "/etc/php${PHP_VERSION}/bin/php" /usr/bin/php; \
         ln -s "/etc/php${PHP_VERSION}/bin/pecl" /usr/bin/pecl; \
-        ln -s "/etc/php${PHP_VERSION}/sbin/php-fpm" /usr/sbin/php-fpm;
+        ln -s "/etc/php${PHP_VERSION}/sbin/php-fpm" /usr/sbin/php-fpm; \
+        php --version;
 
 # Set php-fpm config files
 RUN set -eux; \
@@ -125,7 +127,15 @@ RUN set -eux; \
         echo "extension=memcached.so" > "${PHP_INI_SCAN_DIR}/20-memcached.ini";
 
 # https://www.php.net/manual/fr/install.fpm.php
-# change pid on php-fpm.conf
-# cp /opt/php-7.3.11/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-# chmod 755 /etc/init.d/php-fpm
-# /etc/init.d/php-fpm start
+RUN set -eux; \
+        cp "/opt/php-${PHP_VERSION}/sapi/fpm/init.d.php-fpm" /etc/init.d/php-fpm; \
+        sed -i 's@php_fpm_PID=\${prefix}@php_fpm_INI=\${prefix}/etc/php.ini\nphp_fpm_PID=\${prefix}@g' /etc/init.d/php-fpm; \
+        sed -i 's@--pid \$php_fpm_PID@--pid \$php_fpm_PID -c \$php_fpm_INI@g' /etc/init.d/php-fpm; \
+        chmod 755 /etc/init.d/php-fpm;
+
+COPY docker-entrypoint /usr/local/bin/
+
+RUN set -eux; \
+        chmod 755 /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["docker-entrypoint"]
