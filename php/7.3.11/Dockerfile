@@ -5,7 +5,7 @@ FROM debian:buster-slim
 # https://github.com/docker-library/php/blob/master/7.3/buster/fpm/Dockerfile
 
 # ENV LC_ALL UTF-8
-ENV DEBIAN_FRONTEND noninteractive 
+ENV DEBIAN_FRONTEND noninteractive
 
 ENV PHP_VERSION 7.3.11
 ENV MONGODB_VERSION 1.6.0
