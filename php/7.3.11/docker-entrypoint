@@ -9,4 +9,7 @@ if [ ! -f "$php_fpm_LOG" ]; then
     echo "" > "$php_fpm_LOG"
 fi
 
+#HOOK_BEGIN
+#HOOK_END
+
 tail -f "$php_fpm_LOG"

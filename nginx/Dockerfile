@@ -43,4 +43,9 @@ RUN set -eux; \
     # apt-get remove --purge --auto-remove -y ca-certificates; \
     # rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/nginx.list; \
 
+RUN set -eux; \
+    if [ -f "/usr/local/bin/docker-entrypoint" ]; then \
+        sed -i 's@#HOOK_END@/etc/init.d/nginx start\n#HOOK_END@g' /usr/local/bin/docker-entrypoint; \
+    fi;
+
 # CMD ["/etc/init.d/nginx", "start;"]
