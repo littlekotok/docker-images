@@ -7,8 +7,8 @@ FROM kotok:php7.3-fpm
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV NGINX_VERSION   1.17.5
-ENV NJS_VERSION     0.3.6
+ENV NGINX_VERSION   1.17.6
+ENV NJS_VERSION     0.3.7
 ENV PKG_RELEASE     1~buster
 
 RUN set -eux; \
