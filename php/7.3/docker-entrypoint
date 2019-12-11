@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+/etc/init.d/php-fpm start
+
+php_fpm_LOG="/etc/php7.3/var/log/php-fpm.log"
+
+if [ ! -f "$php_fpm_LOG" ]; then
+    echo "" > "$php_fpm_LOG"
+fi
+
+#HOOK_BEGIN
+#HOOK_END
+
+tail -f "$php_fpm_LOG"
