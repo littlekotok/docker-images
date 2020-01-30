@@ -12,5 +12,5 @@
 
 ## Nginx
 
-	docker build -t kotok:nginx-1.17.5 nginx/
+	docker build -t kotok:nginx-1.17 nginx/
 
