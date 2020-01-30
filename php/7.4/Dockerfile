@@ -1,14 +1,10 @@
 FROM debian:buster-slim
 
-# docker build -t kotok:php7.3-fpm .
-
-# https://github.com/docker-library/php/blob/master/7.3/buster/fpm/Dockerfile
-
 # ENV LC_ALL UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV PHP_MAJOR 7.4
-ENV PHP_VERSION 7.4.0
+ENV PHP_VERSION 7.4.2
 ENV MONGODB_VERSION 1.6.1
 ENV MEMCACHED_VERSION 3.1.5
 

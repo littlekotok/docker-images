@@ -1,14 +1,12 @@
-# FROM debian:buster-slim
 FROM kotok:php7.3-fpm
 
-# docker build -t kotok:nginx-1.17.5 .
 # https://github.com/nginxinc/docker-nginx/blob/fe97d699daae7e04f916771ac520f7cf25ab2b27/mainline/buster/Dockerfile
 # https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#prebuilt_debian
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV NGINX_VERSION   1.17.6
-ENV NJS_VERSION     0.3.7
+ENV NGINX_VERSION   1.17.8
+ENV NJS_VERSION     0.3.8
 ENV PKG_RELEASE     1~buster
 
 RUN set -eux; \
