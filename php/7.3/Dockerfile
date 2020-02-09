@@ -26,9 +26,7 @@ ENV PHPIZE_DEPS \
 RUN set -eux; \
         apt-get update; \
         apt-get -y --no-install-recommends install \
-            nano \
             openssl \
-            wget \
             procps \
             $PHPIZE_DEPS \
             ca-certificates \
@@ -138,3 +136,9 @@ RUN set -eux; \
         chmod 755 /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
+
+STOPSIGNAL SIGQUIT
+
+EXPOSE 9000
+
+CMD ["php-fpm"]
